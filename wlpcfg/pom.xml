@@ -2,18 +2,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>myParentGroupId</groupId>
-        <artifactId>myArtifactId</artifactId>
+        <groupId>my-parent-groupid</groupId>
+        <artifactId>my-artifact-id</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>myGroupId</groupId>
-    <artifactId>myArtifactId-wlpcfg</artifactId>
+    <groupId>my-groupid</groupId>
+    <artifactId>my-artifact-id-wlpcfg</artifactId>
     <packaging>liberty-assembly</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>myGroupId</groupId>
+            <groupId>my-groupid</groupId>
             <artifactId>${warName}</artifactId>
             <version>${warVersion}</version>
             <type>war</type>
@@ -132,7 +132,7 @@
                             <rules>
                                 <requireProperty>
                                     <property>accept.features.license</property>
-                                    <message>You must set a value for the 'accept.features.license' property defined in myProject-wlpcfg/pom.xml. Please review the license terms and conditions for additional features to be installed and if you accept the license terms and conditions then run the Maven command with '-Daccept.features.license=true'.</message>
+                                    <message>You must set a value for the 'accept.features.license' property defined in wlpcfg/pom.xml. Please review the license terms and conditions for additional features to be installed and if you accept the license terms and conditions then run the Maven command with '-Daccept.features.license=true'.</message>
                                     <regex>true</regex>
                                     <regexMessage>Additional features could not be installed as the license terms and conditions were not accepted. If you accept the license terms and conditions then run the Maven command with '-Daccept.features.license=true'.</regexMessage>
                                 </requireProperty>

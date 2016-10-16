@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>myParentGroupId</groupId>
-        <artifactId>myArtifactId</artifactId>
+        <groupId>my-parent-groupid</groupId>
+        <artifactId>my-artifact-id</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     
-    <groupId>myGroupId</groupId>
-    <artifactId>myArtifactId-deploy</artifactId>
+    <groupId>my-groupid</groupId>
+    <artifactId>my-artifact-id-deploy</artifactId>
     <packaging>pom</packaging>
     
     <dependencies>

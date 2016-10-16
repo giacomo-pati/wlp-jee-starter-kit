@@ -2,11 +2,11 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>myParentGroupId</groupId>
-    <artifactId>myArtifactId</artifactId>
+    <groupId>my-parent-groupid</groupId>
+    <artifactId>my-artifact-id</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -14,48 +14,41 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    
-    <scm>
-        <connection>scm:git:git@github.com:WASdev/tool.accelerate.core.git</connection>
-        <developerConnection>scm:git@github.com:WASdev/tool.accelerate.core.git</developerConnection>
-        <url>git@github.com:WASdev/tool.accelerate.core.git</url>
-    </scm>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        
-        
+
+
         <!-- Liberty server properties -->
         <wlpServerName>LibertyProjectServer</wlpServerName>
         <testServerHttpPort>9080</testServerHttpPort>
         <testServerHttpsPort>9443</testServerHttpsPort>
-        <warName>myArtifactId-application</warName>
+        <warName>my-artifact-id-application</warName>
         <warVersion>1.0-SNAPSHOT</warVersion>
         <!--This is set in the ibm-web-ext.xml file -->
-        <warContext>myLibertyApp</warContext>
+        <warContext>${app.name}</warContext>
         <package.file>${project.build.directory}/${app.name}.zip</package.file>
         <packaging.type>usr</packaging.type>
-        
+
         <!-- Cloud Foundry/Bluemix properties -->
-        <cf.context>eu-gb.mybluemix.net</cf.context>
-        <cf.target>https://api.eu-gb.bluemix.net</cf.target>
+        <cf.context>mybluemix.net</cf.context>
+        <cf.target>https://api.ng.bluemix.net</cf.target>
         <cf.space>dev</cf.space>
         <cf.context.root>${cf.host}.${cf.context}/${warContext}</cf.context.root>
-        
-        <!-- The Cloud Foundry or Bluemix organization, username and password can be 
+
+        <!-- The Cloud Foundry or Bluemix organization, username and password can be
             entered here. -->
         <!-- <cf.org></cf.org> -->
         <!-- <cf.username></cf.username> -->
         <!-- <cf.password></cf.password> -->
         <!-- This is the host for your app in Bluemix and what it will be called in the dashboard. -->
         <cf.host>${app.name}</cf.host>
-        
-    <app.name>calc-add-service</app.name>
+        <app.name>my-artifact-id</app.name>
     </properties>
-    
+
     <repositories>
         <repository>
             <id>liberty-starter-maven-repo</id>
@@ -65,23 +58,23 @@
     </repositories>
 
     <modules>
-        <module>myProject-application</module>
-        <module>myProject-wlpcfg</module>
-        <module>myProject-deploy</module>
+        <module>application</module>
+        <module>wlpcfg</module>
+        <module>deploy</module>
     </modules>
-    
-    
+
+
     <profiles>
         <profile>
             <id>localServer</id>
             <modules>
-                <module>myProject-deploy/myProject-localServer</module>
+                <module>deploy/localServer</module>
             </modules>
         </profile>
         <profile>
             <id>bluemix</id>
             <modules>
-                <module>myProject-deploy/myProject-bluemix</module>
+                <module>deploy/bluemix</module>
             </modules>
         <activation>
                 <activeByDefault>true</activeByDefault>
@@ -126,7 +119,7 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <pluginManagement>
             <plugins>
