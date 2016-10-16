@@ -33,3 +33,5 @@ This starter kit is created with http://liberty-starter.wasdev.developer.ibm.com
   	</profiles>
   </settings>
   ```
+
+* `mvn install` will compile, test, package and deploy the application to Bluemix.
