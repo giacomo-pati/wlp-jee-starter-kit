@@ -107,7 +107,7 @@
                     <username>${cf.username}</username>
                     <password>${cf.password}</password>
                     <appname>${cf.host}</appname>
-                    <memory>512</memory>
+                    <memory>256</memory>
                 </configuration>
                 <executions>
                     <execution>
@@ -146,5 +146,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
