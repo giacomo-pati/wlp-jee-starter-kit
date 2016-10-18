@@ -19,7 +19,7 @@ public class AboutServiceITest extends EndpointTest {
 				.get(url("/about")) //
 				.asJson();
 
-		assertEquals(System.getProperty("war.name"), response.getBody().getObject().getString("name"));
+		assertEquals(System.getProperty("war.name"), response.getBody().getObject().getString("application"));
 	}
 
 }

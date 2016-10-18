@@ -28,6 +28,13 @@ public class TestApplication {
 
     @Test
     public void testDeployment() {
+    	try {
+    		// Give the application a few seconds to get started.
+			Thread.sleep(10000l);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+    	
         String context = System.getProperty("cf.context.root");
         String url = "http://" + context + "/index.html";
         System.out.println("Testing " + url);
