@@ -4,13 +4,13 @@ This starter kit is created with http://liberty-starter.wasdev.developer.ibm.com
 
 ## TODO after initial clone
 
-* Replace all `my-parent-groupid`, `my-artifact-id` and `my-groupid` in the project
+* Replace all `ch.pati`, `pati-ms` and `ch.pati` in the project
 
   ```bash
   # Mac OS X sed, for Linux use sed -i -e ...
-  find ./ -type f -exec sed -i '' -e 's/my-parent-groupid/MY_PARENT_GROUPID/g' {} \;
-  find ./ -type f -exec sed -i '' -e 's/my-groupid/MY_GROUPID/g' {} \;
-  find ./ -type f -exec sed -i '' -e 's/my-artifact-id/MY_ARTIFACT_ID/g' {} \;
+  find ./ -type f -exec sed -i '' -e 's/ch.pati/MY_PARENT_GROUPID/g' {} \;
+  find ./ -type f -exec sed -i '' -e 's/ch.pati/MY_GROUPID/g' {} \;
+  find ./ -type f -exec sed -i '' -e 's/pati-ms/MY_ARTIFACT_ID/g' {} \;
   ```
 
 * Edit or create `~/.m2/settings.xml`

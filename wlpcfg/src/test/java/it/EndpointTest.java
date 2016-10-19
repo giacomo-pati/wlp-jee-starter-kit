@@ -15,7 +15,8 @@
  *******************************************************************************/
 package it;
 
-import static org.junit.Assert.assertTrue;
+import com.mashape.unirest.http.Unirest;
+import org.junit.Before;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -23,45 +24,43 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
-import org.junit.Before;
-
-import com.mashape.unirest.http.Unirest;
+import static org.junit.Assert.assertTrue;
 
 public class EndpointTest {
 
-	private final String PORT = System.getProperty("liberty.test.port");
-	private final String WAR_NAME = System.getProperty("war.name");
+    private final String PORT = System.getProperty("liberty.test.port");
+    private final String WAR_NAME = System.getProperty("war.name");
 
-	@Before
-	public void setup() {
-		Unirest.setDefaultHeader("Content-Type", "application/json");
-		Unirest.setDefaultHeader("Accept", "application/json");
-	}
+    @Before
+    public void setup() {
+        Unirest.setDefaultHeader("Content-Type", "application/json");
+        Unirest.setDefaultHeader("Accept", "application/json");
+    }
 
-	public void testEndpoint(String endpoint, String expectedOutput) {
-		String url = "http://localhost:" + PORT + "/" + WAR_NAME + endpoint;
-		System.out.println("Testing " + url);
-		Response response = sendRequest(url, "GET");
-		int responseCode = response.getStatus();
-		assertTrue("Incorrect response code: " + responseCode, responseCode == 200);
+    public void testEndpoint(String endpoint, String expectedOutput) {
+        String url = "http://localhost:" + PORT + "/" + WAR_NAME + endpoint;
+        System.out.println("Testing " + url);
+        Response response = sendRequest(url, "GET");
+        int responseCode = response.getStatus();
+        assertTrue("Incorrect response code: " + responseCode, responseCode == 200);
 
-		String responseString = response.readEntity(String.class);
-		response.close();
-		assertTrue("Incorrect response, response is " + responseString, responseString.contains(expectedOutput));
-	}
+        String responseString = response.readEntity(String.class);
+        response.close();
+        assertTrue("Incorrect response, response is " + responseString, responseString.contains(expectedOutput));
+    }
 
-	public Response sendRequest(String url, String requestType) {
-		Client client = ClientBuilder.newClient();
-		System.out.println("Testing " + url);
-		WebTarget target = client.target(url);
-		Invocation.Builder invoBuild = target.request();
-		Response response = invoBuild.build(requestType).invoke();
-		return response;
-	}
+    public Response sendRequest(String url, String requestType) {
+        Client client = ClientBuilder.newClient();
+        System.out.println("Testing " + url);
+        WebTarget target = client.target(url);
+        Invocation.Builder invoBuild = target.request();
+        Response response = invoBuild.build(requestType).invoke();
+        return response;
+    }
 
-	protected String url(String uri) {
-		String url = "http://localhost:" + PORT + "/" + WAR_NAME + "/api" + uri;
-		System.out.println("Testing " + url);
-		return url;
-	}
+    protected String url(String uri) {
+        String url = "http://localhost:" + PORT + "/" + WAR_NAME + "/api" + uri;
+        System.out.println("Testing " + url);
+        return url;
+    }
 }

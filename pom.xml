@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>my-parent-groupid</groupId>
-    <artifactId>my-artifact-id</artifactId>
+    <groupId>ch.pati</groupId>
+    <artifactId>pati-ms</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -26,7 +28,7 @@
         <wlpServerName>LibertyProjectServer</wlpServerName>
         <testServerHttpPort>9080</testServerHttpPort>
         <testServerHttpsPort>9443</testServerHttpsPort>
-        <warName>my-artifact-id-application</warName>
+        <warName>pati-ms-application</warName>
         <warVersion>1.0-SNAPSHOT</warVersion>
         <!--This is set in the ibm-web-ext.xml file -->
         <warContext>${app.name}</warContext>
@@ -34,26 +36,21 @@
         <packaging.type>usr</packaging.type>
 
         <!-- Cloud Foundry/Bluemix properties -->
-        <cf.context>mybluemix.net</cf.context>
-        <cf.target>https://api.ng.bluemix.net</cf.target>
+        <cf.region>eu-gb.</cf.region><!-- leave empty if you are on US region -->
+        <cf.context>${cf.region}mybluemix.net</cf.context>
+        <cf.target>https://api.eu-gb.bluemix.net</cf.target>
         <cf.space>dev</cf.space>
         <cf.context.root>${cf.host}.${cf.context}/${warContext}</cf.context.root>
 
-        <!-- The Cloud Foundry or Bluemix organization, username and password can be
-            entered here. -->
-        <!-- <cf.org></cf.org> -->
-        <!-- <cf.username></cf.username> -->
-        <!-- <cf.password></cf.password> -->
-        <!-- This is the host for your app in Bluemix and what it will be called in the dashboard. -->
         <cf.host>${app.name}</cf.host>
-        <app.name>my-artifact-id</app.name>
+        <app.name>pati-ms</app.name>
     </properties>
 
     <repositories>
         <repository>
             <id>liberty-starter-maven-repo</id>
             <name>liberty-starter-maven-repo</name>
-        <url>http://liberty-app-accelerator.wasdev.developer.ibm.com/start/api/v1/repo</url>
+            <url>http://liberty-app-accelerator.wasdev.developer.ibm.com/start/api/v1/repo</url>
         </repository>
     </repositories>
 
@@ -76,7 +73,7 @@
             <modules>
                 <module>deploy/bluemix</module>
             </modules>
-        <activation>
+            <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
@@ -90,7 +87,7 @@
     </profiles>
 
     <dependencies>
-    <dependency>
+        <dependency>
             <groupId>net.wasdev.wlp.starters.rest</groupId>
             <artifactId>provided-pom</artifactId>
             <version>0.0.2</version>

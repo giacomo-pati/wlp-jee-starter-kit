@@ -1,38 +1,39 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>my-parent-groupid</groupId>
-        <artifactId>my-artifact-id</artifactId>
+        <groupId>ch.pati</groupId>
+        <artifactId>pati-ms</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>my-groupid</groupId>
-    <artifactId>my-artifact-id-wlpcfg</artifactId>
+    <groupId>ch.pati</groupId>
+    <artifactId>pati-ms-wlpcfg</artifactId>
     <packaging>liberty-assembly</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>my-groupid</groupId>
+            <groupId>ch.pati</groupId>
             <artifactId>${warName}</artifactId>
             <version>${warVersion}</version>
             <type>war</type>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
             <version>1.4.9</version>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-client</artifactId>
@@ -40,7 +41,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -58,7 +59,9 @@
                 <configuration>
                     <includeArtifactIds>server-snippet</includeArtifactIds>
                     <prependGroupId>true</prependGroupId>
-                    <outputDirectory>${project.build.directory}/wlp/usr/servers/${wlpServerName}/configDropins/defaults</outputDirectory>
+                    <outputDirectory>
+                        ${project.build.directory}/wlp/usr/servers/${wlpServerName}/configDropins/defaults
+                    </outputDirectory>
                 </configuration>
             </plugin>
             <!-- Enable liberty-maven plugin -->
@@ -74,7 +77,7 @@
                         <default.http.port>${testServerHttpPort}</default.http.port>
                         <default.https.port>${testServerHttpsPort}</default.https.port>
                     </bootstrapProperties>
-                <features>
+                    <features>
                         <acceptLicense>${accept.features.license}</acceptLicense>
                         <feature>apiDiscovery-1.0</feature>
                     </features>
@@ -126,7 +129,7 @@
                     </execution>
                 </executions>
             </plugin>
-        <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>1.4.1</version>
@@ -141,9 +144,16 @@
                             <rules>
                                 <requireProperty>
                                     <property>accept.features.license</property>
-                                    <message>You must set a value for the 'accept.features.license' property defined in wlpcfg/pom.xml. Please review the license terms and conditions for additional features to be installed and if you accept the license terms and conditions then run the Maven command with '-Daccept.features.license=true'.</message>
+                                    <message>You must set a value for the 'accept.features.license' property defined in
+                                        wlpcfg/pom.xml. Please review the license terms and conditions for additional
+                                        features to be installed and if you accept the license terms and conditions then
+                                        run the Maven command with '-Daccept.features.license=true'.
+                                    </message>
                                     <regex>true</regex>
-                                    <regexMessage>Additional features could not be installed as the license terms and conditions were not accepted. If you accept the license terms and conditions then run the Maven command with '-Daccept.features.license=true'.</regexMessage>
+                                    <regexMessage>Additional features could not be installed as the license terms and
+                                        conditions were not accepted. If you accept the license terms and conditions
+                                        then run the Maven command with '-Daccept.features.license=true'.
+                                    </regexMessage>
                                 </requireProperty>
                             </rules>
                             <fail>true</fail>
