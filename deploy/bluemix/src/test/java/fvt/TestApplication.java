@@ -16,7 +16,6 @@
 package fvt;
 
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -24,16 +23,28 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+import static org.junit.Assert.assertTrue;
+
 public class TestApplication {
 
     @Test
     public void testDeployment() {
-    	try {
-    		// Give the application a few seconds to get started.
-			Thread.sleep(30000l);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+        try {
+            // Give the application a few seconds to get started.
+            for (int i = 0; i < 6; i++) {
+                Thread.sleep(10000l);
+                String context = System.getProperty("cf.context.root");
+                String url = "http://" + context + "/index.html";
+                System.out.println("Testing " + url);
+                Response response = sendRequest(url, "GET");
+                int responseCode = response.getStatus();
+                if (responseCode != 404) {
+                    break;
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         String context = System.getProperty("cf.context.root");
         String url = "http://" + context + "/index.html";
@@ -41,7 +52,7 @@ public class TestApplication {
         Response response = sendRequest(url, "GET");
         int responseCode = response.getStatus();
         assertTrue("Incorrect response code: " + responseCode,
-                   responseCode == 200);
+                responseCode == 200);
         String responseString = response.readEntity(String.class);
         response.close();
         assertTrue("Incorrect response, response is " + responseString, responseString.contains("<h1>Welcome to your Liberty Application</h1>"));
